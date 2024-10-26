@@ -108,17 +108,14 @@
           </div>
 
           <div class="col-md-6 py-3 py-md-0">
-            <form action="mailto:Sirftajammul@gmail.com">
-
-              <input type="text" class="form-control" placeholder="Where To" required><br>
-              <input type="text" class="form-control" placeholder="How Many" required><br>
-              <input type="date" class="form-control" placeholder="Arrivals" required><br>
-              <input type="date" class="form-control" placeholder="Leaving" required><br>
-              <textarea class="form-control" rows="5" name="text" placeholder="Enter Your Name & Details"></textarea>
-             <center> <input type="submit" value="Book Now" class="submit" required></center>
-
-            </form>
-          </div>
+            <form onsubmit="submitForm(event)">
+              <input type="text" id="whereTo" class="form-control" placeholder="Where To" required><br>
+              <input type="text" id="howMany" class="form-control" placeholder="How Many" required><br>
+              <input type="date" id="arrivals" class="form-control" placeholder="Arrivals" required><br>
+              <input type="date" id="leaving" class="form-control" placeholder="Leaving" required><br>
+              <textarea id="details" class="form-control" rows="5" placeholder="Enter Your Name & Details"></textarea><br>
+              <center><input type="submit" value="Book Now" class="submit"></center>
+          </form>
 
         </div>
       </div>
@@ -500,7 +497,29 @@
     <!-- Footer End -->
 
 
-
+    <script>
+      function submitForm(event) {
+          event.preventDefault();
+          
+          // Get form field values
+          const whereTo = document.getElementById("whereTo").value;
+          const howMany = document.getElementById("howMany").value;
+          const arrivals = document.getElementById("arrivals").value;
+          const leaving = document.getElementById("leaving").value;
+          const details = document.getElementById("details").value;
+      
+          // Construct the mailto link
+          const mailtoLink = `mailto:Sirftajammul@gmail.com?subject=Booking Request&body=` +
+              `Where To: ${encodeURIComponent(whereTo)}%0D%0A` +
+              `How Many: ${encodeURIComponent(howMany)}%0D%0A` +
+              `Arrivals: ${encodeURIComponent(arrivals)}%0D%0A` +
+              `Leaving: ${encodeURIComponent(leaving)}%0D%0A` +
+              `Details: ${encodeURIComponent(details)}`;
+      
+          // Open the mail client
+          window.location.href = mailtoLink;
+      }
+      </script>
 
 
 
